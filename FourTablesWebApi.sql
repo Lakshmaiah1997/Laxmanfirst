@@ -113,4 +113,34 @@ GO
 ALTER DATABASE [Iblelaxman] SET  READ_WRITE 
 GO
 
+CREATE TABLE [dbo].[City] (
+    [Ctyid]   INT          IDENTITY (1, 1) NOT NULL,
+    [Ctyname] VARCHAR (50) NOT NULL,
+    [Sid]     INT          NULL,
+    PRIMARY KEY CLUSTERED ([Ctyid] ASC),
+    FOREIGN KEY ([Sid]) REFERENCES [dbo].[State] ([Sid])
+);
+
+CREATE TABLE [dbo].[Country] (
+    [Cid]   INT          IDENTITY (1, 1) NOT NULL,
+    [Cname] VARCHAR (50) NULL,
+    PRIMARY KEY CLUSTERED ([Cid] ASC)
+);
+
+CREATE TABLE [dbo].[Location] (
+    [Locid]   INT          IDENTITY (1, 1) NOT NULL,
+    [Locname] VARCHAR (50) NOT NULL,
+    [Ctyid]   INT          NULL,
+    PRIMARY KEY CLUSTERED ([Locid] ASC),
+    FOREIGN KEY ([Ctyid]) REFERENCES [dbo].[City] ([Ctyid])
+);
+
+CREATE TABLE [dbo].[State] (
+    [Sid]   INT          IDENTITY (1, 1) NOT NULL,
+    [Sname] VARCHAR (50) NOT NULL,
+    [Cid]   INT          NULL,
+    PRIMARY KEY CLUSTERED ([Sid] ASC),
+    FOREIGN KEY ([Cid]) REFERENCES [dbo].[Country] ([Cid])
+);
+
 
